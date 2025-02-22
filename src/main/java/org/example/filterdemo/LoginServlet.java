@@ -8,8 +8,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.sendRedirect("login.jsp"); // Redirect to login page
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -18,7 +23,7 @@ public class LoginServlet extends HttpServlet {
 
         if ("admin".equals(username) && "1234".equals(password)) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", username); // Store user in session
+            session.setAttribute("user", username);
 
             response.sendRedirect("admin/dashboard.jsp"); // Redirect after login
         } else {
